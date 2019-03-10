@@ -156,7 +156,7 @@ module.exports = function (app) {
 
 
     benParamsGet (
-        '/test/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
+        '/test/params/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
         `SELECT * FROM articles WHERE articles.id = ?`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
@@ -174,6 +174,18 @@ module.exports = function (app) {
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+    );
+
+// TESTING CREATE, UPDATE AND DELETE ----------------------------------------------------------------
+    //create get
+    benNormalGet (
+        '/test/create', 'error_page', 'create_test', 'Creating Stuff', 
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
     );
 
 } // End of 'Module.Exports'

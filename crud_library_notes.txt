@@ -1,4 +1,4 @@
-Read: Normal, Param, Query(searchbar);
+Read: Normal, Param, Query(searchbar); -> (DONE)
 
 Create/Update: Fields, Fields Images, Fields Other files
 
