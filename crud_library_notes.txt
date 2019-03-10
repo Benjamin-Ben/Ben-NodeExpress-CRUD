@@ -1,8 +1,8 @@
 Read: Normal, Param, Query(searchbar);
 
-Create/Update: Fields, Image, Fields and Image, Other files, Fields and Other files
+Create/Update: Fields, Fields Images, Fields Other files
 
 Delete: 1 Single row, Rows selected in SQL 
 
 
-( See if you can put your get objects inside the posts file, so you don't have to write many sql selects. Also remember to add ...fields in the res.render )
+( You can put multiple SQL Quries, but only use some of them instead. )
