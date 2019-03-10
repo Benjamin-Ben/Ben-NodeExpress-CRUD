@@ -5,6 +5,4 @@ Create/Update: Fields, Image, Fields and Image, Other files, Fields and Other fi
 Delete: 1 Single row, Rows selected in SQL 
 
 
-// IMPORTANT REDIRECT, CHECK IF IT WORKS!!!!!
-( req.session.error = 'Incorrect username or password';
-res.redirect('/login'); )
+( See if you can put your get objects inside the posts file, so you don't have to write many sql selects. Also remember to add ...fields in the res.render )
