@@ -95,7 +95,7 @@ module.exports = function (app) {
         const benSearchGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
             app.get( urlName, ( req, res, next ) => {
     
-                    db.query(sqlQuery1, [`%${req.query.search_query}%`], ( err, results1 ) => {
+                    db.query(sqlQuery1, [`%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`], ( err, results1 ) => {
                         if (err) { 
                             res.render(viewTemplateError, { err }); 
                         }
@@ -138,15 +138,15 @@ module.exports = function (app) {
     // Testing routes  ----------------------------------------------------------------
 
     /*
-        benNormalGet parameters ORDER
         urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6
     */
 
     // You have to fill ALL sql queries even if you don't use them. So in the ones you don't use, just put a query that will return nothing, so the server won't be overwhelmed
 
     benNormalGet (
-        '/test', 'error_page', 'select_testing', 'Selecting Stuff', 
+        '/', 'error_page', 'select_testing', 'Selecting Everything',
         `SELECT * FROM articles`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
@@ -154,10 +154,9 @@ module.exports = function (app) {
         `SELECT articles.title FROM articles WHERE articles.id = 0;`
     );
 
-
     benParamsGet (
-        '/test/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
-        `SELECT * FROM articles WHERE articles.id = ?`,
+        '/test/update/:id', 'error_page', 'create_and_update_test', 'Selecting Stuff with a param id', 
+        `SELECT * FROM testing_10 WHERE testing_10.id = ?`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
@@ -165,15 +164,14 @@ module.exports = function (app) {
         `SELECT articles.title FROM articles WHERE articles.id = 0;` 
     );
 
-
-    benSearchGet(
-        '/test_search', 'error_page', 'select_testing', 'Selecting Stuff with Search Bar',
-        `SELECT * FROM articles WHERE articles.title LIKE ?`,
+    benParamsGet ( 
+        '/test/delete/:id', 'error_page', 'delete_test', 'Deleting Somehting', 
+        `SELECT * FROM testing_10 WHERE testing_10.id = ?;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
     );
 
 } // End of 'Module.Exports'

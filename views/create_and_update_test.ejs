@@ -1,0 +1,10 @@
+<section>
+    <h1><%= ( typeof title != 'undefined' ) ? title : '' %></h1>
+
+    <form action="/test/update/<%= results1[0].id %>" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" id=""><br><br>
+        <button type="submit">Update</button>
+    </form>
+
+    <p><%= (typeof errorMessage != 'undefined') ? errorMessage : '' %></p>
+</section>
