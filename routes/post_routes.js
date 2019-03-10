@@ -2046,19 +2046,7 @@ module.exports = function (app) {
         });
     }
 
-    /* 
-        Parameters ORDER: 
-        urlName, emptyFieldsErrorMessage, viewTemplateError, redirectUrlName, viewTemplate, pageTitle, sqlInsertQuery, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6
-    */
 
-   benUpdateImages (
-       '/test/update/:id', 'There was no image', 'You are only allowed to upload image files', 'error_page', '/', 'create_and_update_test', 'Updating Stuff', 
-        `UPDATE testing_10 SET column1 = ? WHERE testing_10.id = ?`,
-        `SELECT * FROM testing_10 WHERE testing_10.id = ?`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`
-    );
+    // =============================== DELETE =============================== //
+    
 }

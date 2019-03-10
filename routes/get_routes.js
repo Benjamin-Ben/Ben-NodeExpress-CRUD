@@ -164,5 +164,14 @@ module.exports = function (app) {
         `SELECT articles.title FROM articles WHERE articles.id = 0;` 
     );
 
+    benParamsGet ( 
+        '/test/delete/:id', 'error_page', 'delete_test', 'Deleting Somehting', 
+        `SELECT * FROM testing_10 WHERE testing_10.id = ?;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
+    );
 
 } // End of 'Module.Exports'
