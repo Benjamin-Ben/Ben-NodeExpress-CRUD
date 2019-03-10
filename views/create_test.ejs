@@ -2,8 +2,8 @@
     <h1><%= ( typeof title != 'undefined' ) ? title : '' %></h1>
 
     <form action="/test/create" method="post" enctype="multipart/form-data">
-        <input type="text" name="name1" placeholder="Name1...."><br>
-        <br>
+        <input type="text" name="name1" id=""><br><br>
+        <input type="file" name="image" id=""><br><br>
         <button type="submit">Create</button>
     </form>
 
