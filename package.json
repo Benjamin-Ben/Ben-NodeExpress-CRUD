@@ -1,7 +1,7 @@
 {
-  "name": "recipes.net",
-  "version": "0.2.0",
-  "description": "web application",
+  "name": "Ben-NodeExpress-CRUD ",
+  "version": "1.0.0",
+  "description": "NodeJS Express CRUD library",
   "main": "server.js",
   "scripts": {
     "start": "node -r dotenv/config server.js dotenv_config_path=./.env",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rts-cmk/recipes-dot-net.git"
+    "url": "https://github.com/Benjamin-Ben/Ben-NodeExpress-CRUD/tree/master"
   },
-  "author": "Brian Emilius <be@rts.dk>",
+  "author": "Benjamin Bloch Bowden",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rts-cmk/recipes-dot-net/issues"
+    "url": "https://github.com/Benjamin-Ben/Ben-NodeExpress-CRUD/tree/master"
   },
-  "homepage": "https://github.com/rts-cmk/recipes-dot-net#readme",
+  "homepage": "https://github.com/Benjamin-Ben/Ben-NodeExpress-CRUD/tree/master",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^6.1.0",
