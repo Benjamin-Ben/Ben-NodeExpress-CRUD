@@ -138,7 +138,6 @@ module.exports = function (app) {
     // Testing routes  ----------------------------------------------------------------
 
     /*
-        benNormalGet parameters ORDER
         urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6
     */
 

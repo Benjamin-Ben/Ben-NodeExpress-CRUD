@@ -1,8 +1,11 @@
 <section>
     <h1><%= ( typeof title != 'undefined' ) ? title : '' %></h1>
 
-    <form action="/test/create" method="post">
-        <input type="text" name="name1">
+    <form action="/test/create" method="post" enctype="multipart/form-data">
+        <input type="text" name="name1" placeholder="Name1...."><br>
+        <br>
+        <button type="submit">Create</button>
     </form>
 
+    <p><%= (typeof errorMessage != 'undefined') ? errorMessage : '' %></p>
 </section>
