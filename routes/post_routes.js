@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = function (app) {
     // =============================== CREATE =============================== //
 
-    // Create Fields only
+    // Creating Fields only
     const benCreateFields = {
 
         // The number after 'post' represents the ammount of fields you have in your form
@@ -1379,7 +1379,8 @@ module.exports = function (app) {
     }
 
     // =============================== UPDATE =============================== //
-    // Creating Fields only
+   
+    // Updating Fields only
     const benUpdateFields = {
 
         // The number after 'post' represents the ammount of fields you have in your form
@@ -1966,15 +1967,93 @@ module.exports = function (app) {
         }
     }
     
+    const benUpdateImages = function ( urlName, emptyFieldsErrorMessage, invalidImageErrorMessage, viewTemplateError, redirectUrlName, viewTemplate, pageTitle, sqlInsertQuery, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        app.post( urlName, (req, res, next) => {
+            let success = true;
+            let errorMessage;
+
+            if ( !req.files.image.name ) {
+                success = false; 
+                errorMessage = emptyFieldsErrorMessage;
+            }
+
+            else if( req.files.image.type.indexOf('image') === -1 ) {
+                success = false;
+                errorMessage = invalidImageErrorMessage;
+            }
+
+            if (success === true) {
+
+                const theImage = req.files.image;
+                const renammedFile = `${Date.now()}_${theImage.name}`;
+        
+                fs.readFile(theImage.path, (err, data) => {
+                    if (err) { 
+                        res.render(viewTemplateError, { err }); 
+                    }
+                    fs.writeFile(`./public/img/${renammedFile}`, data, err => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+
+                    db.query( sqlInsertQuery, [renammedFile, req.params.id], (err, results) => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+                        res.redirect(redirectUrlName);
+                    });
+                });
+            });
+            } else {
+                db.query(sqlQuery1, [req.params.id], ( err, results1 ) => {
+                    if (err) { 
+                        res.render(viewTemplateError, { err }); 
+                    }
+
+                    db.query(sqlQuery2, ( err, results2 ) => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+
+                        db.query(sqlQuery3, ( err, results3 ) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+
+                            db.query(sqlQuery4, ( err, results4 ) => { 
+                                if (err) { 
+                                    res.render(viewTemplateError, { err }); 
+                                }
+
+                                db.query(sqlQuery5, ( err, results5 ) => {
+                                    if (err) { 
+                                        res.render(viewTemplateError, { err }); 
+                                    }
+
+                                    db.query(sqlQuery6, ( err, results6 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+
+                                        res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6, errorMessage, ...req.fields });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            }
+        });
+    }
 
     /* 
         Parameters ORDER: 
         urlName, emptyFieldsErrorMessage, viewTemplateError, redirectUrlName, viewTemplate, pageTitle, sqlInsertQuery, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6
     */
 
-   benUpdateFields.post3 (
-       '/test/update/:id', 'One or more fields were empty', 'error_page', '/', 'create_and_update_test', 'Updating   Stuff', 
-        `UPDATE testing_10 SET column1 = ?, column2 = ?, column3 = ? WHERE testing_10.id = ?`,
+   benUpdateImages (
+       '/test/update/:id', 'There was no image', 'You are only allowed to upload image files', 'error_page', '/', 'create_and_update_test', 'Updating Stuff', 
+        `UPDATE testing_10 SET column1 = ? WHERE testing_10.id = ?`,
         `SELECT * FROM testing_10 WHERE testing_10.id = ?`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
