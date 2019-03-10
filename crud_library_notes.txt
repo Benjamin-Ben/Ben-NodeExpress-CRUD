@@ -1,6 +1,6 @@
 Read: Normal, Param, Query(searchbar); -> (DONE)
 
-Create/Update: Fields, Fields Images, Fields Other files
+Create/Update: Fields, Fields Images
 
 Delete: 1 Single row, Rows selected in SQL 
 
