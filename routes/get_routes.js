@@ -34,6 +34,10 @@ module.exports = function (app) {
                                     }
 
                                     db.query(sqlQuery6, ( err, results6 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+
                                         res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
                                     });
                                 });
@@ -73,6 +77,10 @@ module.exports = function (app) {
                                     }
 
                                     db.query(sqlQuery6, ( err, results6 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+
                                         res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
                                     });
                                 });
@@ -113,6 +121,10 @@ module.exports = function (app) {
                                         }
     
                                         db.query(sqlQuery6, ( err, results6 ) => {
+                                            if (err) { 
+                                                res.render(viewTemplateError, { err }); 
+                                            }
+
                                             res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
                                         });
                                     });
@@ -133,24 +145,35 @@ module.exports = function (app) {
     // You have to fill ALL sql queries even if you don't use them. So in the ones you don't use, just put a query that will return nothing, so the server won't be overwhelmed
 
     benNormalGet (
-    '/test', 'error_page', 'select_testing', 'Selecting Stuff', 
-    `SELECT * FROM articles`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`
+        '/test', 'error_page', 'select_testing', 'Selecting Stuff', 
+        `SELECT * FROM articles`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
     );
 
 
     benParamsGet (
-    '/test/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
-    `SELECT * FROM articles WHERE articles.id = ?`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-    `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+        '/test/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
+        `SELECT * FROM articles WHERE articles.id = ?`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+    );
+
+
+    benSearchGet(
+        '/test_search', 'error_page', 'select_testing', 'Selecting Stuff with Search Bar',
+        `SELECT * FROM articles WHERE articles.title LIKE ?`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
     );
 
 } // End of 'Module.Exports'
