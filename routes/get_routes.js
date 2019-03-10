@@ -4,36 +4,176 @@ module.exports = function (app) {
     
     // ============== READ ============== //
 
-    // Get routes there are totally normal
-    const benNormalGets = {
+    // Getting content with a tottaly normal get route
+    const benNormalGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        app.get( urlName, ( req, res, next ) => {
 
-        // The number after get specifies how many sql queries we will pass (get1, get2, get3.....)
-
-        get0: function ( urlName, viewTemplate, pageTitle ) {
-            app.get( urlName, ( req, res, next ) => {
-                res.render(viewTemplate, { 'title': pageTitle });
-            });
-        },
-
-        get1: function ( urlName, sqlQuery1, viewTemplate, pageTitle ) {
-            app.get( urlName, ( req, res, next ) => {
                 db.query(sqlQuery1, ( err, results1 ) => {
-                    if (err) { res.render('error_page', { err }); }
+                    if (err) { 
+                        res.render(viewTemplateError, { err }); 
+                    }
 
-                    res.render(viewTemplate, { 'title': pageTitle, results1 });
+                    db.query(sqlQuery2, ( err, results2 ) => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+
+                        db.query(sqlQuery3, ( err, results3 ) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+
+                            db.query(sqlQuery4, ( err, results4 ) => { 
+                                if (err) { 
+                                    res.render(viewTemplateError, { err }); 
+                                }
+
+                                db.query(sqlQuery5, ( err, results5 ) => {
+                                    if (err) { 
+                                        res.render(viewTemplateError, { err }); 
+                                    }
+
+                                    db.query(sqlQuery6, ( err, results6 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+
+                                        res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
+                                    });
+                                });
+                            });
+                        });
+                    });
                 });
             });
-        }
+        } // End of 'benNormalGet'
 
-    } // End of 'benNormalGets'
+    const benParamsGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        app.get( urlName, ( req, res, next ) => {
 
+                db.query(sqlQuery1, [req.params.id], ( err, results1 ) => {
+                    if (err) { 
+                        res.render(viewTemplateError, { err }); 
+                    }
+
+                    db.query(sqlQuery2, ( err, results2 ) => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+
+                        db.query(sqlQuery3, ( err, results3 ) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+
+                            db.query(sqlQuery4, ( err, results4 ) => { 
+                                if (err) { 
+                                    res.render(viewTemplateError, { err }); 
+                                }
+
+                                db.query(sqlQuery5, ( err, results5 ) => {
+                                    if (err) { 
+                                        res.render(viewTemplateError, { err }); 
+                                    }
+
+                                    db.query(sqlQuery6, ( err, results6 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+
+                                        res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        } // End of 'benParamsGet'
+
+
+        const benSearchGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+            app.get( urlName, ( req, res, next ) => {
+    
+                    db.query(sqlQuery1, [`%${req.query.search_query}%`], ( err, results1 ) => {
+                        if (err) { 
+                            res.render(viewTemplateError, { err }); 
+                        }
+    
+                        db.query(sqlQuery2, ( err, results2 ) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+    
+                            db.query(sqlQuery3, ( err, results3 ) => {
+                                if (err) { 
+                                    res.render(viewTemplateError, { err }); 
+                                }
+    
+                                db.query(sqlQuery4, ( err, results4 ) => { 
+                                    if (err) { 
+                                        res.render(viewTemplateError, { err }); 
+                                    }
+    
+                                    db.query(sqlQuery5, ( err, results5 ) => {
+                                        if (err) { 
+                                            res.render(viewTemplateError, { err }); 
+                                        }
+    
+                                        db.query(sqlQuery6, ( err, results6 ) => {
+                                            if (err) { 
+                                                res.render(viewTemplateError, { err }); 
+                                            }
+
+                                            res.render(viewTemplate, { 'title': pageTitle, results1, results2, results3, results4, results5, results6 });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            } // End of 'benSearchGet'
 
     // Testing routes  ----------------------------------------------------------------
 
+    /*
+        benNormalGet parameters ORDER
+        urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6
+    */
 
-    benNormalGets.get0('/', 'home', 'Home Page');
+    // You have to fill ALL sql queries even if you don't use them. So in the ones you don't use, just put a query that will return nothing, so the server won't be overwhelmed
 
-    // Testing selects
-    benNormalGets.get1('/test', `SELECT * FROM articles`, 'select_testing', '')
+    benNormalGet (
+        '/test', 'error_page', 'select_testing', 'Selecting Stuff', 
+        `SELECT * FROM articles`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
+    );
 
-}
+
+    benParamsGet (
+        '/test/:id', 'error_page', 'select_testing', 'Selecting Stuff with a param id', 
+        `SELECT * FROM articles WHERE articles.id = ?`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+    );
+
+
+    benSearchGet(
+        '/test_search', 'error_page', 'select_testing', 'Selecting Stuff with Search Bar',
+        `SELECT * FROM articles WHERE articles.title LIKE ?`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+    );
+
+} // End of 'Module.Exports'

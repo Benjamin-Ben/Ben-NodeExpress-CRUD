@@ -1,0 +1,8 @@
+Read: Normal, Param, Query(searchbar);
+
+Create/Update: Fields, Fields Images, Fields Other files
+
+Delete: 1 Single row, Rows selected in SQL 
+
+
+( You can put multiple SQL Quries, but only use some of them instead. )
