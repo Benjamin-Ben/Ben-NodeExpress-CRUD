@@ -1,1 +1,5 @@
-<form action="" method="post"></form>
+<form action="/test/delete/<%= results1[0].id %>" method="post">
+    <legend>Are you sure you want to delete <%= results1[0].column1 %></legend>
+    <a href="/">Don't Delete</a>
+    <button type="submit">Delete</button>
+</form>

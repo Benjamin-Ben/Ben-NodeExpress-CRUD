@@ -1,8 +1,0 @@
-Read: Normal, Param, Query(searchbar); -> (DONE)
-
-Create/Update: Fields, Fields Images
-
-Delete: 1 Single row, Rows selected in SQL 
-
-
-( You can put multiple SQL Quries, but only use some of them instead. )
