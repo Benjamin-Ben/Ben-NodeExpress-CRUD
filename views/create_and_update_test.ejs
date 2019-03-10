@@ -1,7 +1,7 @@
 <section>
     <h1><%= ( typeof title != 'undefined' ) ? title : '' %></h1>
 
-    <form action="/test/update" method="post" enctype="multipart/form-data">
+    <form action="/test/update/<%= results1[0].id %>" method="post" enctype="multipart/form-data">
         <input type="text" name="name1" id="" value="<%= (typeof results1[0].column1 != 'undefined' ) ? results1[0].column1 : ''%>"><br><br>
         <input type="text" name="name2" id="" value="<%= (typeof results1[0].column2 != 'undefined' ) ? results1[0].column2 : ''%>"><br><br>
         <input type="text" name="name3" id="" value="<%= (typeof results1[0].column3 != 'undefined' ) ? results1[0].column3 : ''%>"><br><br>

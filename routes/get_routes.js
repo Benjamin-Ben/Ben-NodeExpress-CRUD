@@ -143,6 +143,17 @@ module.exports = function (app) {
 
     // You have to fill ALL sql queries even if you don't use them. So in the ones you don't use, just put a query that will return nothing, so the server won't be overwhelmed
 
+    benNormalGet (
+        '/', 'error_page', 'select_testing', 'Selecting Everything',
+        `SELECT * FROM articles`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
+        `SELECT articles.title FROM articles WHERE articles.id = 0;`
+    );
+
     benParamsGet (
         '/test/update/:id', 'error_page', 'create_and_update_test', 'Selecting Stuff with a param id', 
         `SELECT * FROM testing_10 WHERE testing_10.id = ?`,
