@@ -95,7 +95,7 @@ module.exports = function (app) {
         const benSearchGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
             app.get( urlName, ( req, res, next ) => {
     
-                    db.query(sqlQuery1, [`%${req.query.search_query}%`], ( err, results1 ) => {
+                    db.query(sqlQuery1, [`%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`], ( err, results1 ) => {
                         if (err) { 
                             res.render(viewTemplateError, { err }); 
                         }
@@ -168,7 +168,7 @@ module.exports = function (app) {
 
     benSearchGet(
         '/test_search', 'error_page', 'select_testing', 'Selecting Stuff with Search Bar',
-        `SELECT * FROM articles WHERE articles.title LIKE ?`,
+        `SELECT * FROM articles WHERE articles.title LIKE ? OR articles.body_text LIKE ?`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
         `SELECT articles.title FROM articles WHERE articles.id = 0;`,
