@@ -2048,5 +2048,25 @@ module.exports = function (app) {
 
 
     // =============================== DELETE =============================== //
-    
+    const deleteSingleRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        app.post(urlName, (req, res, next) => {
+            db.query(sqlDeleteQuery, [req.params.id], (err, results) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+                res.redirect(redirectUrlName);
+            });
+        });
+    }
+
+    const deleteMultipleRows = function () {
+        
+    }
+
+
+    deleteSingleRow (
+        '/test/delete/:id', 'error_page', '/', 
+        `DELETE FROM testing_10 WHERE testing_10.id = ?`
+    );
+
 }
