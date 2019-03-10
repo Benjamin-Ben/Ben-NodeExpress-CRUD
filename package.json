@@ -1,5 +1,5 @@
 {
-  "name": "Ben-NodeExpress-CRUD ",
+  "name": "bennodeexpresscrud",
   "version": "1.0.0",
   "description": "NodeJS Express CRUD library",
   "main": "server.js",
