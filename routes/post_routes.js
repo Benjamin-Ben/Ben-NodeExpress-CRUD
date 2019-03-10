@@ -2048,7 +2048,7 @@ module.exports = function (app) {
 
 
     // =============================== DELETE =============================== //
-    const deleteSingleRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+    const benDeleteSingleRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
         app.post(urlName, (req, res, next) => {
             db.query(sqlDeleteQuery, [req.params.id], (err, results) => {
                 if (err) { 
@@ -2059,14 +2059,15 @@ module.exports = function (app) {
         });
     }
 
-    const deleteMultipleRows = function () {
-        
+    const benDeleteMultipleRows = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        app.post(urlName, (req, res, next) => {
+            db.query(sqlDeleteQuery, (err, results) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+                res.redirect(redirectUrlName);
+            });
+        });
     }
-
-
-    deleteSingleRow (
-        '/test/delete/:id', 'error_page', '/', 
-        `DELETE FROM testing_10 WHERE testing_10.id = ?`
-    );
 
 }
