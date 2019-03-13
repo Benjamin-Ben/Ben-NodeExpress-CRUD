@@ -1996,12 +1996,18 @@ module.exports = function (app) {
                             res.render(viewTemplateError, { err }); 
                         }
 
-                    db.query( sqlInsertQuery, [renammedFile, req.params.id], (err, results) => {
-                        if (err) { 
-                            res.render(viewTemplateError, { err }); 
-                        }
-                        res.redirect(redirectUrlName);
-                    });
+                        fs.unlink( `./public/img/${[req.params.id]}`, (err, imageResults) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+                        });
+
+                        db.query( sqlInsertQuery, [renammedFile, req.params.id], (err, results) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+                            res.redirect(redirectUrlName);
+                        });
                 });
             });
             } else {
@@ -2068,6 +2074,22 @@ module.exports = function (app) {
                 res.redirect(redirectUrlName);
             });
         });
+    }
+
+    const benDeleteImageRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        app.post(urlName, (req, res, next) => {
+            fs.unlink(`./public/img/${[req.params.id]}`, (err, imageResults) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+            });
+            db.query( sqlDeleteQuery, [req.params.id], (err, results) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+                res.redirect(redirectUrlName);
+            });
+        });   
     }
 
 }
