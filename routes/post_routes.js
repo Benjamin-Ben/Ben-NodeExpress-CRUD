@@ -1996,7 +1996,7 @@ module.exports = function (app) {
                             res.render(viewTemplateError, { err }); 
                         }
 
-                        fs.unlink( [req.params.id], (err, imageResults) => {
+                        fs.unlink( `./public/img/${[req.params.id]}`, (err, imageResults) => {
                             if (err) { 
                                 res.render(viewTemplateError, { err }); 
                             }
