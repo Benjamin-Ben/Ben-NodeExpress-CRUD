@@ -2076,4 +2076,20 @@ module.exports = function (app) {
         });
     }
 
+    const benDeleteImageRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        app.post(urlName, (req, res, next) => {
+            fs.unlink(req.params.id, (err, imageResults) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+            });
+            db.query( sqlDeleteQuery, (err, results) => {
+                if (err) { 
+                    res.render(viewTemplateError, { err }); 
+                }
+                res.redirect(redirectUrlName);
+            });
+        });   
+    }
+
 }
