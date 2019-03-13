@@ -2078,12 +2078,12 @@ module.exports = function (app) {
 
     const benDeleteImageRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
         app.post(urlName, (req, res, next) => {
-            fs.unlink(req.params.id, (err, imageResults) => {
+            fs.unlink(`./public/img/${[req.params.id]}`, (err, imageResults) => {
                 if (err) { 
                     res.render(viewTemplateError, { err }); 
                 }
             });
-            db.query( sqlDeleteQuery, (err, results) => {
+            db.query( sqlDeleteQuery, [req.params.id], (err, results) => {
                 if (err) { 
                     res.render(viewTemplateError, { err }); 
                 }
@@ -2091,17 +2091,5 @@ module.exports = function (app) {
             });
         });   
     }
-
-
-    benUpdateImages(
-        '/test/update/:id', 'Der var ikke noget billede', 'Du kan kun uploade billeder', 'error_page', '/', 'create_and_update_test', 'Something went wrong', 
-        `UPDATE test_table SET img = ? WHERE test_table.img = ?`,
-        `SELECT * FROM test_table WHERE test_table.img = ?`,
-        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
-        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
-        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
-        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
-        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`
-    )
 
 }
