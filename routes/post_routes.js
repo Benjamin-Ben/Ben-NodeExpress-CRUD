@@ -1996,12 +1996,18 @@ module.exports = function (app) {
                             res.render(viewTemplateError, { err }); 
                         }
 
-                    db.query( sqlInsertQuery, [renammedFile, req.params.id], (err, results) => {
-                        if (err) { 
-                            res.render(viewTemplateError, { err }); 
-                        }
-                        res.redirect(redirectUrlName);
-                    });
+                        fs.unlink( [req.params.id], (err, imageResults) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+                        });
+
+                        db.query( sqlInsertQuery, [renammedFile, req.params.id], (err, results) => {
+                            if (err) { 
+                                res.render(viewTemplateError, { err }); 
+                            }
+                            res.redirect(redirectUrlName);
+                        });
                 });
             });
             } else {
