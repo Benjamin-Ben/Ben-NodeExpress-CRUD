@@ -2092,4 +2092,16 @@ module.exports = function (app) {
         });   
     }
 
+
+    benUpdateImages(
+        '/test/update/:id', 'Der var ikke noget billede', 'Du kan kun uploade billeder', 'error_page', '/', 'create_and_update_test', 'Something went wrong', 
+        `UPDATE test_table SET img = ? WHERE test_table.img = ?`,
+        `SELECT * FROM test_table WHERE test_table.img = ?`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`
+    )
+
 }

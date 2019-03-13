@@ -145,33 +145,31 @@ module.exports = function (app) {
 
     benNormalGet (
         '/', 'error_page', 'select_testing', 'Selecting Everything',
-        `SELECT * FROM articles`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`
+        `SELECT * FROM test_table`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`
     );
 
     benParamsGet (
         '/test/update/:id', 'error_page', 'create_and_update_test', 'Selecting Stuff with a param id', 
-        `SELECT * FROM testing_10 WHERE testing_10.id = ?`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;` 
+        `SELECT * FROM test_table WHERE test_table.img = ?`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`
     );
 
     benNormalGet ( 
         '/test/delete', 'error_page', 'delete_multiple_test', 'Deleting Somehting', 
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`,
-        `SELECT articles.title FROM articles WHERE articles.id = 0;`
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`,
+        `SELECT test_table.name FROM test_table WHERE test_table.id = 0;`
     );
 
 } // End of 'Module.Exports'
