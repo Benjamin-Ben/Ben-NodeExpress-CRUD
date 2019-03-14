@@ -4,10 +4,10 @@ const fs = require('fs');
 module.exports = function (app) {
     
     // =============================== CREATE =============================== //
-    const createRoutes = function () {
+    const createRoutes =  {
         
         // Creating Fields only
-        const benCreateFields = {
+        benCreateFields: {
     
             // The number after 'post' represents the ammount of fields you have in your form
     
@@ -591,10 +591,10 @@ module.exports = function (app) {
                     }
                 });
             }
-        }
+        },
     
         // Creating Fields and Images
-        const benCreateFieldsAndImages = {
+        benCreateFieldsAndImages: {
     
             // The number after 'post' represents the ammount of fields/files you have in your form
     
@@ -1384,9 +1384,9 @@ module.exports = function (app) {
         
 
     // =============================== UPDATE =============================== //
-    const updateRoutes = function () {
+    const updateRoutes = {
         // Updating Fields only
-        const benUpdateFields = {
+        benUpdateFields: {
     
             // The number after 'post' represents the ammount of fields you have in your form
     
@@ -1970,10 +1970,10 @@ module.exports = function (app) {
                     }
                 });
             }
-        }
+        },
         
         //Updating Images only
-        const benUpdateImages = function ( urlName, emptyFieldsErrorMessage, invalidImageErrorMessage, viewTemplateError, redirectUrlName, viewTemplate, pageTitle, sqlInsertQuery, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        benUpdateImages: function ( urlName, emptyFieldsErrorMessage, invalidImageErrorMessage, viewTemplateError, redirectUrlName, viewTemplate, pageTitle, sqlInsertQuery, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
             app.post( urlName, (req, res, next) => {
                 let success = true;
                 let errorMessage;
@@ -2061,9 +2061,9 @@ module.exports = function (app) {
     
 
     // =============================== DELETE =============================== //
-    const deleteRoutes = function () {
+    const deleteRoutes = {
         
-        const benDeleteSingleRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        benDeleteSingleRow: function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
             app.post(urlName, (req, res, next) => {
                 db.query(sqlDeleteQuery, [req.params.id], (err, results) => {
                     if (err) { 
@@ -2072,9 +2072,9 @@ module.exports = function (app) {
                     res.redirect(redirectUrlName);
                 });
             });
-        }
+        },
     
-        const benDeleteMultipleRows = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        benDeleteMultipleRows: function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
             app.post(urlName, (req, res, next) => {
                 db.query(sqlDeleteQuery, (err, results) => {
                     if (err) { 
@@ -2083,9 +2083,9 @@ module.exports = function (app) {
                     res.redirect(redirectUrlName);
                 });
             });
-        }
+        },
     
-        const benDeleteImageRow = function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
+        benDeleteImageRow: function (urlName, viewTemplateError, redirectUrlName, sqlDeleteQuery) {
             app.post(urlName, (req, res, next) => {
                 fs.unlink(`./public/img/${[req.params.id]}`, (err, imageResults) => {
                     if (err) { 
