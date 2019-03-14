@@ -3,10 +3,17 @@ const db = require('../config/mysql')();
 module.exports = function (app) {
     
     // =============================== READ =============================== //
-    const readRoutes = function () {
+    const readRoutes = {
+
+        // Getting content without any SQL Queries
+        benNoSqlGet: function ( urlName, viewTemplate, pageTitle ) {
+            app.get( urlName, (req, res, next) => {
+                res.render( viewTemplate, { 'title': pageTitle } );
+            });
+        },
         
         // Getting content with a tottaly normal get route
-        const benNormalGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        benNormalGet: function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
             app.get( urlName, ( req, res, next ) => {
     
                     db.query(sqlQuery1, ( err, results1 ) => {
@@ -47,9 +54,9 @@ module.exports = function (app) {
                         });
                     });
                 });
-            } // End of 'benNormalGet'
+            }, // End of 'benNormalGet'
     
-        const benParamsGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        benParamsGet: function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
             app.get( urlName, ( req, res, next ) => {
     
                     db.query(sqlQuery1, [req.params.id], ( err, results1 ) => {
@@ -90,10 +97,10 @@ module.exports = function (app) {
                         });
                     });
                 });
-            } // End of 'benParamsGet'
+            }, // End of 'benParamsGet'
     
     
-        const benSearchGet = function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
+        benSearchGet: function ( urlName, viewTemplateError, viewTemplate, pageTitle, sqlQuery1, sqlQuery2, sqlQuery3, sqlQuery4, sqlQuery5, sqlQuery6 ) {
                 app.get( urlName, ( req, res, next ) => {
         
                         db.query(sqlQuery1, [`%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`, `%${req.query.search_query}%`], ( err, results1 ) => {
@@ -137,6 +144,10 @@ module.exports = function (app) {
             } // End of 'benSearchGet'
 
     }
-            
+    
+    // ======================= HOME ======================= //
+    readRoutes.benNoSqlGet(
+        '/', 'home', 'Home Page'
+    );
             
 } // End of 'Module.Exports'
